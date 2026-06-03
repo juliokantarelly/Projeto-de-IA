@@ -8,4 +8,7 @@ REDUCAO_POR_GERACAO = 0.9
 TAXA_CROSSOVER = 0.8
 TAXA_MUTACAO = 0.1
 
-FUNCAO: Callable[[int], float] = lambda x: (-(x - 3) ** 2) + 10
+FUNCAO_01 = lambda x: (-(x-3)**2)+10
+FUNCAO_02 = lambda x: (-(x)**2)
+FUNCAO_03 = lambda x: (10(x**2) - x**4)
+FUNCAO_04 = lambda x: (x) / (x**2 + 1)
