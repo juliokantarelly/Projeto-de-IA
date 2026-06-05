@@ -1,9 +1,11 @@
 import random
 from fitness import fitness
 
-def aleatoria_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
+def best_aleatoria_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
     selecionados = []
-    qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
+    # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
+    # Resolve o problema de 9.999 virar 9
+    qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
     
     if verbose:
         print(f"qtd_geracao: {qtd_geracao}")
@@ -17,15 +19,19 @@ def aleatoria_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
             print(f"Fitness: {fitness(funcao, individuo)}")
             print()
 
-        selecionados.append(individuo)
+        selecionados.append(
+            (individuo, fitness(funcao, individuo))
+        )
+    
     if not selecionados:
-        return populacao
+        return max(populacao, key=lambda ind: fitness(funcao, ind))
     else:
-        return selecionados
+        return max(selecionados, key=lambda x: x[1])[0]
 
-def intervalo_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
+def best_intervalo_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
     selecionados = []
-    qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
+    # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
+    qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
     
     qtd_analise = len(populacao) // qtd_geracao
     if verbose:
@@ -44,12 +50,17 @@ def intervalo_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
             print(f"Selecinado: {individuo_apto} | Porque fitness: {fitness(funcao, individuo_apto)}")
             print()
         
-        selecionados.append(individuo_apto)
-    
-    return selecionados
+        selecionados.append(
+            (individuo_apto, fitness(funcao, individuo_apto))
+        )
+    if not selecionados:
+        return max(populacao, key=lambda ind: fitness(funcao, ind))
+    else:
+        return max(selecionados, key=lambda x: x[1])[0]
 
-def aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
-    qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
+def best_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
+    # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
+    qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
 
     populacao_ordenada = sorted(populacao, key=lambda x: fitness(funcao, x), reverse=True)
 
@@ -58,11 +69,12 @@ def aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
 
     selecionados = populacao_ordenada[:qtd_geracao]
 
-    return selecionados
+    return max(selecionados, key=lambda x: fitness(funcao, x))
 
-def roleta(populacao, funcao, reducao_por_geracao, verbose=False):
+def best_roleta(populacao, funcao, reducao_por_geracao, verbose=False):
     selecionados = []
-    qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
+    # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
+    qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
 
     if verbose:
         print(f"qtd_geracao: {qtd_geracao}")
@@ -85,14 +97,15 @@ def roleta(populacao, funcao, reducao_por_geracao, verbose=False):
                     print(f"Indivíduo selecionado pela roleta: {individuo} | Fitness: {fitness(funcao, individuo)}")
                     print()
 
-                selecionados.append(individuo)
+                selecionados.append((individuo, fitness(funcao, individuo)))
                 break
 
-    return selecionados
+    return max(selecionados, key=lambda x: x[1])[0]
 
-def ranking(populacao, funcao, reducao_por_geracao, verbose=False):
+def best_ranking(populacao, funcao, reducao_por_geracao, verbose=False):
     selecionados = []
-    qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
+    # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
+    qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
 
     if verbose:
         print(f"qtd_geracao: {qtd_geracao}")
@@ -107,6 +120,6 @@ def ranking(populacao, funcao, reducao_por_geracao, verbose=False):
             print(f"Indivíduo selecionado pelo ranking: {pick} | Fitness: {fitness(funcao, pick)}")
             print()
 
-        selecionados.append(pick)
+        selecionados.append((pick, fitness(funcao, pick)))
     
-    return selecionados
+    return max(selecionados, key=lambda x: x[1])[0]

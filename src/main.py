@@ -1,14 +1,21 @@
-LIMITE_INFERIOR = -512
-LIMITE_SUPERIOR = 512
+from utils import *
+from select_best import *
+from crossover import *
+from mutation import mutar
+from fitness import fitness
+from definitions import *
+from selection import *
+from genetic_algorithm import GeneticAlgorithm
 
-TAMANHO_POPULACAO = 100
-NUM_GERACOES = 100
-REDUCAO_POR_GERACAO = 0.9
 
-TAXA_CROSSOVER = 0.8
-TAXA_MUTACAO = 0.1
+def main():
 
-FUNCAO_01 = lambda x: (-(x-3)**2)+10
-FUNCAO_02 = lambda x: (-(x)**2)
-FUNCAO_03 = lambda x: (10(x**2) - x**4)
-FUNCAO_04 = lambda x: (x) / (x**2 + 1)
+    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_01"])
+
+    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
+                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
+
+    print(resultado)
+
+if __name__ == "__main__":
+    main()

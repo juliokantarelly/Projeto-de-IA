@@ -1,33 +1,36 @@
 import random
 
-def crossover_single_point(pai1, pai2, taxa_crossover, test=False):
+def single_point(pai1, pai2, taxa_crossover, num_bits, test=False):
     if random.random() < taxa_crossover or test:
         
-        pai1_bin = bin(pai1)[2:]
-        pai2_bin = bin(pai2)[2:]
+        pai1_bin = format(pai1 & ((1 << num_bits) -1), f'0{num_bits}b')     
+        pai2_bin = format(pai1 & ((1 << num_bits) -1), f'0{num_bits}b')
         
-        maior_tamanho = max(len(pai1_bin), len(pai2_bin))
-        pai1_bin = pai1_bin.zfill(maior_tamanho)
-        pai2_bin = pai2_bin.zfill(maior_tamanho)
         
-        ponto = random.randint(0, maior_tamanho - 1)
+        ponto = random.randint(0, num_bits - 1)
         
         x_filho1 = pai1_bin[:ponto] + pai2_bin[ponto:]
         x_filho2 = pai2_bin[:ponto] + pai1_bin[ponto:]
 
         filho1 = int(x_filho1, 2)
+
+        if filho1 >= (1 << (num_bits - 1)): # Se o bit mais significativo for 1, é negativo
+            filho1 -= (1 << num_bits)
+        
         filho2 = int(x_filho2, 2)
+        
+        if filho2 >= (1 << (num_bits - 1)): # Se o bit mais significativo for 1, é negativo
+            filho2 -= (1 << num_bits)
 
         if test: 
             print(f"Ponto a partir do qual vai ter o merge: {ponto}")
             print(f"filho1: {filho1} = {x_filho1} | filho2: {filho2} = {x_filho2}")
 
         return filho1, filho2
-
     else:
         return pai1, pai2
     
-def crossover_dual_point(pai1, pai2, taxa_crossover, test=False):
+def dual_point(pai1, pai2, taxa_crossover, test=False):
     if random.random() < taxa_crossover or test:
         
         pai1_bin = bin(pai1)[2:]
@@ -54,11 +57,11 @@ def crossover_dual_point(pai1, pai2, taxa_crossover, test=False):
             print(f"filho1: {filho1} = {x_filho1} | filho2: {filho2} = {x_filho2}")
 
         return filho1, filho2
-
+    
     else:
         return pai1, pai2
     
-def crossover_uniform(pai1, pai2, taxa_crossover, test=False):
+def uniform(pai1, pai2, taxa_crossover, test=False):
     if random.random() < taxa_crossover or test:
         
         pai1_bin = bin(pai1)[2:]
@@ -89,6 +92,6 @@ def crossover_uniform(pai1, pai2, taxa_crossover, test=False):
             print(f"filho1: {filho1} = {x_filho1} | filho2: {filho2} = {x_filho2}")
         
         return filho1, filho2
-
+    
     else:
         return pai1, pai2
