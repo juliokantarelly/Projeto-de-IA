@@ -6,6 +6,9 @@ from fitness import *
 from definitions import *
 from selection import *
 
+
+# implementação baseada na seguinte página: https://www.datacamp.com/pt/tutorial/genetic-algorithm-python
+
 class GeneticAlgorithm():
 
     def __init__(self, funcao, num_bits, limite_inferior, limite_superior, tam_populacao, func_seleciona_best, fitness):
