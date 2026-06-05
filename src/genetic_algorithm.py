@@ -1,7 +1,7 @@
 from utils import *
 from select_best import *
 from crossover import *
-from mutation import mutar
+from mutation import _mutar, mutar
 from fitness import *
 from definitions import *
 from selection import *
@@ -59,8 +59,8 @@ class GeneticAlgorithm():
 
                 filho1, filho2 = func_crossover(pai1, pai2, taxa_crossover, self.num_bits)
 
-                prox_geracao.append(mutar(individuo=filho1, taxa_mutacao=taxa_mutacao, num_bits=self.num_bits))
-                prox_geracao.append(mutar(individuo=filho2, taxa_mutacao=taxa_mutacao, num_bits=self.num_bits))
+                prox_geracao.append(_mutar(individuo=filho1, taxa_mutacao=taxa_mutacao))
+                prox_geracao.append(_mutar(individuo=filho2, taxa_mutacao=taxa_mutacao))
 
             prox_geracao.extend(populacao)
             populacao = prox_geracao
