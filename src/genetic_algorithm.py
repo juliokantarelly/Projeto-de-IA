@@ -2,19 +2,20 @@ from utils import *
 from select_best import *
 from crossover import *
 from mutation import mutar
-from fitness import fitness
+from fitness import *
 from definitions import *
 from selection import *
 
 class GeneticAlgorithm():
 
-    def __init__(self, funcao, num_bits, limite_inferior, limite_superior, tam_populacao, func_seleciona_best):
+    def __init__(self, funcao, num_bits, limite_inferior, limite_superior, tam_populacao, func_seleciona_best, fitness):
         self.funcao = funcao
         self.num_bits = num_bits
         self.limite_inferior = limite_inferior
         self.limite_superior = limite_superior
         self.tam_populacao = tam_populacao
         self.func_seleciona_best = func_seleciona_best
+        self.fitness = fitness
 
     def genetic_algorithm(self, num_geracoes, reducao_por_geracao, taxa_crossover,
                           taxa_mutacao, func_selecao, func_crossover):
@@ -28,15 +29,15 @@ class GeneticAlgorithm():
         for geracao in range(num_geracoes):
 
 
-            fitnesses = [fitness(funcao=self.funcao, individuo=ind) for ind in populacao]
+            fitnesses = [self.fitness(funcao=self.funcao, individuo=ind) for ind in populacao]
 
-            melhor_ind = self.func_seleciona_best(populacao, self.funcao, reducao_por_geracao)
-            melhor_fit =  fitness(funcao=self.funcao, individuo=melhor_ind)
+            melhor_ind = self.func_seleciona_best(populacao, self.funcao, reducao_por_geracao, self.fitness)
+            melhor_fit =  self.fitness(funcao=self.funcao, individuo=melhor_ind)
 
             mais_aptos.append((melhor_ind, melhor_fit))
             populacao_total.append(populacao[:])
 
-            populacao = func_selecao(populacao, self.funcao, reducao_por_geracao)
+            populacao = func_selecao(populacao, self.funcao, reducao_por_geracao, self.fitness)
             
             prox_geracao = []
 
@@ -52,6 +53,7 @@ class GeneticAlgorithm():
             prox_geracao.extend(populacao)
             populacao = prox_geracao
         
-        melhor_individuo = self.func_seleciona_best(populacao, self.funcao, reducao_por_geracao)
-        melhor_fitness = fitness(self.funcao, melhor_individuo)
+        melhor_individuo = self.func_seleciona_best(populacao, self.funcao, reducao_por_geracao, self.fitness)
+        melhor_fitness = self.fitness(self.funcao, melhor_individuo)
+        
         return melhor_fitness

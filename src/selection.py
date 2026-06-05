@@ -1,7 +1,7 @@
 import random
-from fitness import fitness
+from fitness import *
 
-def aleatoria_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
+def aleatoria_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []
     qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     
@@ -20,7 +20,7 @@ def aleatoria_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
         selecionados.append(individuo)
     return selecionados
 
-def intervalo_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
+def intervalo_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []
     qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     
@@ -45,7 +45,7 @@ def intervalo_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
     
     return selecionados
 
-def aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
+def aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
 
     populacao_ordenada = sorted(populacao, key=lambda x: fitness(funcao, x), reverse=True)
@@ -57,7 +57,7 @@ def aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
 
     return selecionados
 
-def roleta(populacao, funcao, reducao_por_geracao, verbose=False):
+def roleta(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []
     qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
 
@@ -87,7 +87,7 @@ def roleta(populacao, funcao, reducao_por_geracao, verbose=False):
 
     return selecionados
 
-def ranking(populacao, funcao, reducao_por_geracao, verbose=False):
+def ranking(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []
     qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
 

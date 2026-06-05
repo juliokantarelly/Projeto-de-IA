@@ -1,7 +1,7 @@
 import random
-from fitness import fitness
+from fitness import *
 
-def best_aleatoria_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
+def best_aleatoria_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []
     # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     # Resolve o problema de 9.999 virar 9
@@ -28,7 +28,7 @@ def best_aleatoria_aptidao(populacao, funcao, reducao_por_geracao, verbose=False
     else:
         return max(selecionados, key=lambda x: x[1])[0]
 
-def best_intervalo_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
+def best_intervalo_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []
     # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
@@ -58,7 +58,7 @@ def best_intervalo_aptidao(populacao, funcao, reducao_por_geracao, verbose=False
     else:
         return max(selecionados, key=lambda x: x[1])[0]
 
-def best_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
+def best_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
 
@@ -71,7 +71,7 @@ def best_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
 
     return max(selecionados, key=lambda x: fitness(funcao, x))
 
-def best_roleta(populacao, funcao, reducao_por_geracao, verbose=False):
+def best_roleta(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []
     # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
@@ -104,7 +104,7 @@ def best_roleta(populacao, funcao, reducao_por_geracao, verbose=False):
     else:
         return max(selecionados, key=lambda x: x[1])[0]
 
-def best_ranking(populacao, funcao, reducao_por_geracao, verbose=False):
+def best_ranking(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []
     # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))

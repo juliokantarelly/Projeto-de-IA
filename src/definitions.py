@@ -2,7 +2,7 @@ from utils import *
 from select_best import *
 from crossover import *
 from mutation import mutar
-from fitness import fitness
+from fitness import *
 from definitions import *
 from selection import *
 from genetic_algorithm import GeneticAlgorithm
@@ -22,6 +22,12 @@ FUNCAO_01 = lambda x: (-(x-3)**2)+10
 FUNCAO_02 = lambda x: (-(x)**2)
 FUNCAO_03 = lambda x: (10*(x**2) - x**4)
 FUNCAO_04 = lambda x: (x) / (x**2 + 1)
+
+opcoes_fitness = {
+    "FITNESS_MAX": fitness_max,
+    "FITNESS_MIN1": fitness_min1,
+    "FITNESS_MIN2": fitness_min2
+}
 
 opcoes_selecao = {
     "FUNCAO_SELECAO_01" : aleatoria_aptidao,

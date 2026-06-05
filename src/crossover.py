@@ -30,19 +30,14 @@ def single_point(pai1, pai2, taxa_crossover, num_bits, test=False):
     else:
         return pai1, pai2
     
-def dual_point(pai1, pai2, taxa_crossover, test=False):
+def dual_point(pai1, pai2, taxa_crossover, num_bits, test=False):
     if random.random() < taxa_crossover or test:
         
-        pai1_bin = bin(pai1)[2:]
-        pai2_bin = bin(pai2)[2:]
+        pai1_bin = format(pai1 & ((1 << num_bits) -1), f'0{num_bits}b')     
+        pai2_bin = format(pai1 & ((1 << num_bits) -1), f'0{num_bits}b')
         
-        maior_tamanho = max(len(pai1_bin), len(pai2_bin))
-        
-        pai1_bin = pai1_bin.zfill(maior_tamanho)
-        pai2_bin = pai2_bin.zfill(maior_tamanho)
-        
-        ponto_ini = random.randint(0, maior_tamanho - 2)
-        ponto_fim = random.randint(ponto_ini, maior_tamanho - 1)
+        ponto_ini = random.randint(0, num_bits - 2)
+        ponto_fim = random.randint(ponto_ini, num_bits - 1)
         
         x_filho1 = pai1_bin[:ponto_ini] + pai2_bin[ponto_ini:ponto_fim] + pai1_bin[ponto_fim:]
         x_filho2 = pai2_bin[:ponto_ini] + pai1_bin[ponto_ini:ponto_fim] + pai2_bin[ponto_fim:]
@@ -61,21 +56,16 @@ def dual_point(pai1, pai2, taxa_crossover, test=False):
     else:
         return pai1, pai2
     
-def uniform(pai1, pai2, taxa_crossover, test=False):
+def uniform(pai1, pai2, taxa_crossover, num_bits, test=False):
     if random.random() < taxa_crossover or test:
         
-        pai1_bin = bin(pai1)[2:]
-        pai2_bin = bin(pai2)[2:]
-        
-        maior_tamanho = max(len(pai1_bin), len(pai2_bin))
-        
-        pai1_bin = pai1_bin.zfill(maior_tamanho)
-        pai2_bin = pai2_bin.zfill(maior_tamanho)
+        pai1_bin = format(pai1 & ((1 << num_bits) -1), f'0{num_bits}b')     
+        pai2_bin = format(pai1 & ((1 << num_bits) -1), f'0{num_bits}b')
                 
         x_filho1 = ""
         x_filho2 = ""
         
-        for indice in range(maior_tamanho):
+        for indice in range(num_bits):
             mantem = bool(random.randint(0, 1))
             
             if mantem and test:
