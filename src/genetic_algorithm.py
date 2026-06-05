@@ -97,6 +97,6 @@ class GeneticAlgorithm():
 
 
         melhor_individuo = self.func_seleciona_best(populacao, self.funcao, reducao_por_geracao, self.fitness)
-        melhor_fitness = self.fitness(self.funcao, melhor_individuo)
+        melhor_fitness = fitness_max(self.funcao, melhor_individuo)
         
         return melhor_fitness
