@@ -27,34 +27,30 @@ class GeneticAlgorithm():
 
         for geracao in range(num_geracoes):
 
-            if len(populacao) >= 10:
 
-                fitnesses = [fitness(funcao=self.funcao, individuo=ind) for ind in populacao]
+            fitnesses = [fitness(funcao=self.funcao, individuo=ind) for ind in populacao]
 
-                melhor_ind = self.func_seleciona_best(populacao, self.funcao, reducao_por_geracao)
-                melhor_fit =  fitness(funcao=self.funcao, individuo=melhor_ind)
+            melhor_ind = self.func_seleciona_best(populacao, self.funcao, reducao_por_geracao)
+            melhor_fit =  fitness(funcao=self.funcao, individuo=melhor_ind)
 
-                mais_aptos.append((melhor_ind, melhor_fit))
-                populacao_total.append(populacao[:])
+            mais_aptos.append((melhor_ind, melhor_fit))
+            populacao_total.append(populacao[:])
 
-                populacao = func_selecao(populacao, self.funcao, reducao_por_geracao)
-                
-                prox_geracao = []
+            populacao = func_selecao(populacao, self.funcao, reducao_por_geracao)
+            
+            prox_geracao = []
 
-                for i in range(0, len(populacao)-1, 2):
-                    pai1 = populacao[i]
-                    pai2 = populacao[i+1]
+            for i in range(0, len(populacao)-1, 2):
+                pai1 = populacao[i]
+                pai2 = populacao[i+1]
 
-                    filho1, filho2 = func_crossover(pai1, pai2, taxa_crossover, self.num_bits)
+                filho1, filho2 = func_crossover(pai1, pai2, taxa_crossover, self.num_bits)
 
-                    prox_geracao.append(mutar(individuo=filho1, taxa_mutacao=taxa_mutacao, num_bits=self.num_bits))
-                    prox_geracao.append(mutar(individuo=filho2, taxa_mutacao=taxa_mutacao, num_bits=self.num_bits))
+                prox_geracao.append(mutar(individuo=filho1, taxa_mutacao=taxa_mutacao, num_bits=self.num_bits))
+                prox_geracao.append(mutar(individuo=filho2, taxa_mutacao=taxa_mutacao, num_bits=self.num_bits))
 
-                
-                prox_geracao[0] = melhor_ind
-                populacao = prox_geracao
-            else:
-                break
+            prox_geracao.extend(populacao)
+            populacao = prox_geracao
         
         melhor_individuo = self.func_seleciona_best(populacao, self.funcao, reducao_por_geracao)
         melhor_fitness = fitness(self.funcao, melhor_individuo)

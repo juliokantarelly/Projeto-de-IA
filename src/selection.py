@@ -18,10 +18,7 @@ def aleatoria_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
             print()
 
         selecionados.append(individuo)
-    if not selecionados:
-        return populacao
-    else:
-        return selecionados
+    return selecionados
 
 def intervalo_aptidao(populacao, funcao, reducao_por_geracao, verbose=False):
     selecionados = []

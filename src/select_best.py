@@ -99,8 +99,10 @@ def best_roleta(populacao, funcao, reducao_por_geracao, verbose=False):
 
                 selecionados.append((individuo, fitness(funcao, individuo)))
                 break
-
-    return max(selecionados, key=lambda x: x[1])[0]
+    if not selecionados:
+        return max(populacao, key=lambda ind: fitness(funcao, ind))
+    else:
+        return max(selecionados, key=lambda x: x[1])[0]
 
 def best_ranking(populacao, funcao, reducao_por_geracao, verbose=False):
     selecionados = []
@@ -122,4 +124,7 @@ def best_ranking(populacao, funcao, reducao_por_geracao, verbose=False):
 
         selecionados.append((pick, fitness(funcao, pick)))
     
-    return max(selecionados, key=lambda x: x[1])[0]
+    if not selecionados:
+        return max(populacao, key=lambda ind: fitness(funcao, ind))
+    else:
+        return max(selecionados, key=lambda x: x[1])[0]
