@@ -2,7 +2,7 @@ from select_best import best_aleatoria_aptidao, best_intervalo_aptidao, best_apt
 from crossover import single_point, dual_point, uniform
 from fitness import fitness_max, fitness_min1, fitness_min2
 from selection import aleatoria_aptidao, intervalo_aptidao, aptidao, roleta, ranking
-from mutation import mutar, mutation_math
+from mutacao import mutar, muta_math
 
 LIMITE_INFERIOR = -512
 LIMITE_SUPERIOR = 511
@@ -48,6 +48,6 @@ opcoes_crossover = {
 }
 
 opcoes_mutation = {
-    "MUTATION_1" : mutar,
-    "MUTATION_2" : mutation_math
+    "MUTATION_01" : mutar,
+    "MUTATION_02" : muta_math
 }

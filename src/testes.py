@@ -1,146 +1,54 @@
 from utils import *
 from select_best import *
 from crossover import *
-from mutation import mutar
+from mutacao import mutar, muta_math
 from fitness import *
 from definitions import *
 from selection import *
 from genetic_algorithm import GeneticAlgorithm
+import itertools
+
+
+algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, NUM_GERACOES, 
+                                        REDUCAO_POR_GERACAO, TAXA_CROSSOVER, TAXA_MUTACAO)
 
 
 def test():
 
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_01"], opcoes_fitness["FITNESS_MAX"])
+    chaves_fitness = list(opcoes_fitness.keys())
+    chaves_selecao = list(opcoes_selecao.keys())
+    chaves_selecao_best = list(opcoes_selecao_best.keys())
+    chaves_crossover = list(opcoes_crossover.keys())
+    chaves_mutation = list(opcoes_mutation.keys())
 
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
 
-    print(resultado)
+    todas_combinacoes = itertools.product(
+        chaves_fitness, 
+        chaves_selecao, 
+        chaves_selecao_best, 
+        chaves_crossover, 
+        chaves_mutation
+    )
 
-def test2():
+    contador = 1
+    for fit, sel, sel_best, cross, mut in todas_combinacoes:
+        print(f"--- Teste {contador} ---")
+        print(f"Parâmetros: {fit} | {sel} | {sel_best} | {cross} | {mut}")
+        
 
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_02"], opcoes_fitness["FITNESS_MAX"])
+        resultado = algoritmo_genetico.genetic_algorithm(
+            opcoes_fitness[fit], 
+            opcoes_selecao[sel], 
+            opcoes_selecao_best[sel_best],
+            opcoes_crossover[cross], 
+            opcoes_mutation[mut]
+        )
+        
+        print("Resultado:", resultado)
+        print("-" * 30)
+        contador += 1
 
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
 
-    print(resultado)
 
-def test3():
-
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_03"], opcoes_fitness["FITNESS_MAX"])
-
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
-
-    print(resultado)
-
-def test4():
-
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_04"], opcoes_fitness["FITNESS_MAX"])
-
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
-
-    print(resultado)
-
-def test5():
-
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_05"], opcoes_fitness["FITNESS_MAX"])
-
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
-
-    print(resultado)
-
-def test6():
-
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_01"], opcoes_fitness["FITNESS_MIN1"])
-
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
-
-    print(resultado)
-
-def test7():
-
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_02"], opcoes_fitness["FITNESS_MIN1"])
-
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
-
-    print(resultado)
-
-def test8():
-
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_03"], opcoes_fitness["FITNESS_MIN1"])
-
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
-
-    print(resultado)
-
-def test9():
-
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_04"], opcoes_fitness["FITNESS_MIN1"])
-
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
-
-    print(resultado)
-
-def test10():
-
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_05"], opcoes_fitness["FITNESS_MIN1"])
-
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
-
-    print(resultado)
-def test11():
-
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_01"], opcoes_fitness["FITNESS_MIN2"])
-
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
-
-    print(resultado)
-
-def test12():
-
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_02"], opcoes_fitness["FITNESS_MIN2"])
-
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
-
-    print(resultado)
-
-def test13():
-
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_03"], opcoes_fitness["FITNESS_MIN2"])
-
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
-
-    print(resultado)
-
-def test14():
-
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_04"], opcoes_fitness["FITNESS_MIN2"])
-
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
-
-    print(resultado)
-
-def test15():
-
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_05"], opcoes_fitness["FITNESS_MIN2"])
-
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
-
-    print(resultado)
-
-if __name__ == "__test__":
+if __name__ == "__main__":
     test()

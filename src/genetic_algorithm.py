@@ -1,7 +1,7 @@
 from utils import *
 from select_best import *
 from crossover import *
-from mutation import _mutar, mutar
+from mutacao import mutar, muta_math
 from fitness import *
 from definitions import *
 from selection import *
@@ -15,17 +15,19 @@ import pandas as pd
 
 class GeneticAlgorithm():
 
-    def __init__(self, funcao, num_bits, limite_inferior, limite_superior, tam_populacao, func_seleciona_best, fitness):
+    def __init__(self, funcao, num_bits, limite_inferior, limite_superior, tam_populacao, num_geracoes,
+                 reducao_por_geracao, taxa_crossover, taxa_mutacao):
         self.funcao = funcao
         self.num_bits = num_bits
         self.limite_inferior = limite_inferior
         self.limite_superior = limite_superior
         self.tam_populacao = tam_populacao
-        self.func_seleciona_best = func_seleciona_best
-        self.fitness = fitness
+        self.num_geracoes = num_geracoes
+        self.reducao_por_geracao = reducao_por_geracao
+        self.taxa_crossover = taxa_crossover
+        self.taxa_mutacao = taxa_mutacao
 
-    def genetic_algorithm(self, num_geracoes, reducao_por_geracao, taxa_crossover,
-                          taxa_mutacao, func_selecao, func_crossover):
+    def genetic_algorithm(self, func_fitness, func_selecao, func_best_fit, func_crossover, func_mutation):
         
         populacao = criar_populacao(self.tam_populacao, self.limite_inferior, self.limite_superior)
 
@@ -37,19 +39,19 @@ class GeneticAlgorithm():
         tabela.field_names = ["Geração", "x", "Fitness"]
         
 
-        for geracao in range(num_geracoes):
+        for geracao in range(self.num_geracoes):
 
 
-            fitnesses = [self.fitness(funcao=self.funcao, individuo=ind) for ind in populacao]
+            fitnesses = [func_fitness(funcao=self.funcao, individuo=ind) for ind in populacao]
 
-            melhor_ind = self.func_seleciona_best(populacao, self.funcao, reducao_por_geracao, self.fitness)
-            melhor_fit =  self.fitness(funcao=self.funcao, individuo=melhor_ind)
+            melhor_ind = func_best_fit(populacao, self.funcao, self.reducao_por_geracao, func_fitness)
+            melhor_fit =  func_fitness(funcao=self.funcao, individuo=melhor_ind)
 
             mais_aptos.append((melhor_ind, melhor_fit))
             populacao_total.append(populacao[:])
             tabela.add_row([geracao+1, melhor_ind, melhor_fit])
 
-            populacao = func_selecao(populacao, self.funcao, reducao_por_geracao, self.fitness)
+            populacao = func_selecao(populacao, self.funcao, self.reducao_por_geracao, func_fitness)
             
             prox_geracao = []
 
@@ -57,10 +59,10 @@ class GeneticAlgorithm():
                 pai1 = populacao[i]
                 pai2 = populacao[i+1]
 
-                filho1, filho2 = func_crossover(pai1, pai2, taxa_crossover, self.num_bits)
+                filho1, filho2 = func_crossover(pai1, pai2, self.taxa_crossover, self.num_bits)
 
-                prox_geracao.append(_mutar(individuo=filho1, taxa_mutacao=taxa_mutacao))
-                prox_geracao.append(_mutar(individuo=filho2, taxa_mutacao=taxa_mutacao))
+                prox_geracao.append(func_mutation(individuo=filho1, taxa_mutacao=self.taxa_mutacao, num_bits=self.num_bits))
+                prox_geracao.append(func_mutation(individuo=filho2, taxa_mutacao=self.taxa_mutacao, num_bits=self.num_bits))
 
             prox_geracao.extend(populacao)
             populacao = prox_geracao
@@ -96,7 +98,7 @@ class GeneticAlgorithm():
         fig.show()
 
 
-        melhor_individuo = self.func_seleciona_best(populacao, self.funcao, reducao_por_geracao, self.fitness)
+        melhor_individuo = func_best_fit(populacao, self.funcao, self.reducao_por_geracao, func_fitness)
         melhor_fitness = fitness_max(self.funcao, melhor_individuo)
         
         return melhor_fitness

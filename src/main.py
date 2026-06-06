@@ -1,21 +1,18 @@
 from utils import *
 from select_best import *
 from crossover import *
-from mutation import mutar
+from mutacao import mutar, muta_math
 from fitness import *
 from definitions import *
 from selection import *
 from genetic_algorithm import GeneticAlgorithm
 
-#não tive tempo de terminar ainda, tive algumas ideias pra melhorar essa questão, vou tentar implementar sábado de manhã
-#só um esboço de classe, vou alterar algumas coisas ainda
 
 def main():
 
-    algoritmo_genetico = GeneticAlgorithm(FUNCAO_04, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_03"], opcoes_fitness["FITNESS_MIN1"])
+    algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER, TAXA_MUTACAO)
 
-    resultado =  algoritmo_genetico.genetic_algorithm(NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER,
-                                                TAXA_MUTACAO, opcoes_selecao["FUNCAO_SELECAO_05"], opcoes_crossover["FUNCAO_CROSSOVER_01"])
+    resultado =  algoritmo_genetico.genetic_algorithm(opcoes_fitness["FITNESS_MAX"], opcoes_selecao["FUNCAO_SELECAO_01"], opcoes_selecao_best["FUNCAO_SELECAO_BEST_01"], opcoes_crossover["FUNCAO_CROSSOVER_01"], opcoes_mutation["MUTATION_01"])
 
     print(resultado)
 
