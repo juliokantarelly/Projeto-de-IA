@@ -48,6 +48,6 @@ opcoes_crossover = {
 }
 
 opcoes_mutation = {
-    "MUTATION_1" : mutar,
-    "MUTATION_2" : muta_math
+    "MUTATION_01" : mutar,
+    "MUTATION_02" : muta_math
 }
