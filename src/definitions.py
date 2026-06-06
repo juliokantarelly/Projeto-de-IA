@@ -34,7 +34,7 @@ opcoes_selecao = {
     "FUNCAO_SELECAO_02" : intervalo_aptidao,
     "FUNCAO_SELECAO_03" : aptidao,
     "FUNCAO_SELECAO_04" : roleta,
-    "FUNCAO_SELECAO_01" : ranking
+    "FUNCAO_SELECAO_05" : ranking
 }
 
 opcoes_selecao_best = {
@@ -42,7 +42,7 @@ opcoes_selecao_best = {
     "FUNCAO_SELECAO_BEST_02" : best_intervalo_aptidao,
     "FUNCAO_SELECAO_BEST_03" : best_aptidao,
     "FUNCAO_SELECAO_BEST_04" : best_roleta,
-    "FUNCAO_SELECAO_BEST_04" : best_ranking
+    "FUNCAO_SELECAO_BEST_05" : best_ranking
 }
 
 opcoes_crossover = {
