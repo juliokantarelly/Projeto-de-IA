@@ -7,6 +7,9 @@ from definitions import *
 from selection import *
 from genetic_algorithm import GeneticAlgorithm
 
+#não tive tempo de terminar ainda, tive algumas ideias pra melhorar essa questão, vou tentar implementar sábado de manhã
+#só um esboço de classe, vou alterar algumas coisas ainda
+
 def main():
 
     algoritmo_genetico = GeneticAlgorithm(FUNCAO_04, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, opcoes_selecao_best["FUNCAO_SELECAO_BEST_03"], opcoes_fitness["FITNESS_MIN1"])

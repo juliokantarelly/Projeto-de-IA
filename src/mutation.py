@@ -23,7 +23,7 @@ def mutar(individuo, taxa_mutacao, num_bits, test=False):
         
     return individuo
 
-def _mutar(individuo, taxa_mutacao, test=False):
+def mutation_math(individuo, taxa_mutacao, test=False):
     if random.random() < taxa_mutacao or test:
         passo = random.choice([-1, 1])
         individuo_mutado = individuo + passo
