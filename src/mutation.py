@@ -1,8 +1,10 @@
 import random
-from definitions import LIMITE_INFERIOR, LIMITE_SUPERIOR
+
+LIMITE_INFERIOR = -512
+LIMITE_SUPERIOR = 511
 
 #Não utilizar essa mutação, a natureza de mudança dela é pouco significativa.
-def mutar(individuo, taxa_mutacao, num_bits, test=False):
+def mutation(individuo, taxa_mutacao, num_bits, test=False):
     if random.random() < taxa_mutacao or test:
         ind_bin = format(individuo & ((1 << num_bits) - 1), f"0{num_bits}b")
         x_individuo = list(ind_bin)
@@ -23,7 +25,7 @@ def mutar(individuo, taxa_mutacao, num_bits, test=False):
         
     return individuo
 
-def mutation_math(individuo, taxa_mutacao, test=False):
+def mutation_math(individuo, taxa_mutacao, num_bits, test=False):
     if random.random() < taxa_mutacao or test:
         passo = random.choice([-1, 1])
         individuo_mutado = individuo + passo

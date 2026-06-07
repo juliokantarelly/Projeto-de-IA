@@ -1,10 +1,5 @@
 from utils import *
-from select_best import *
-from crossover import *
-from mutacao import mutar, muta_math
 from fitness import *
-from definitions import *
-from selection import *
 import matplotlib.pyplot as plt
 from prettytable import PrettyTable
 import plotly.express as px
@@ -31,7 +26,7 @@ class GeneticAlgorithm():
         
         populacao = criar_populacao(self.tam_populacao, self.limite_inferior, self.limite_superior)
 
-        fig, axs = plt.subplots(1, 1, figsize=(12, 18))
+        fig, _ = plt.subplots(1, 1, figsize=(12, 18))
         mais_aptos = []
         populacao_total = []
 
@@ -42,7 +37,7 @@ class GeneticAlgorithm():
         for geracao in range(self.num_geracoes):
 
 
-            fitnesses = [func_fitness(funcao=self.funcao, individuo=ind) for ind in populacao]
+            # fitnesses = [func_fitness(funcao=self.funcao, individuo=ind) for ind in populacao]
 
             melhor_ind = func_best_fit(populacao, self.funcao, self.reducao_por_geracao, func_fitness)
             melhor_fit =  func_fitness(funcao=self.funcao, individuo=melhor_ind)
@@ -95,7 +90,7 @@ class GeneticAlgorithm():
         fig.update_traces(line=dict(color='royalblue', width=2),
                         marker=dict(size=8, color='royalblue', line=dict(width=1, color='DarkSlateGrey')))
 
-        fig.show()
+        # fig.show()
 
 
         melhor_individuo = func_best_fit(populacao, self.funcao, self.reducao_por_geracao, func_fitness)

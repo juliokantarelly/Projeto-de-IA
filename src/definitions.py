@@ -2,7 +2,7 @@ from select_best import best_aleatoria_aptidao, best_intervalo_aptidao, best_apt
 from crossover import single_point, dual_point, uniform
 from fitness import fitness_max, fitness_min1, fitness_min2
 from selection import aleatoria_aptidao, intervalo_aptidao, aptidao, roleta, ranking
-from mutacao import mutar, muta_math
+from mutation import mutation, mutation_math
 
 LIMITE_INFERIOR = -512
 LIMITE_SUPERIOR = 511
@@ -14,10 +14,11 @@ REDUCAO_POR_GERACAO = 0.5
 TAXA_CROSSOVER = 0.8
 TAXA_MUTACAO = 0.2
 
-FUNCAO_01 = lambda x: ((x-3)**2)+10
+FUNCAO_01 = lambda x: (-(x-3)**2)+10
 FUNCAO_02 = lambda x: ((x)**2)
 FUNCAO_03 = lambda x: (10*(x**2) - x**4)
 FUNCAO_04 = lambda x: (x) / (x**2 + 1)
+FUNCAO_05 = lambda x: (x**2) + 2*x + 1
 
 opcoes_fitness = {
     "FITNESS_MAX": fitness_max,
@@ -48,6 +49,6 @@ opcoes_crossover = {
 }
 
 opcoes_mutation = {
-    "MUTATION_01" : mutar,
-    "MUTATION_02" : muta_math
+    "MUTATION_01" : mutation,
+    "MUTATION_02" : mutation_math
 }
