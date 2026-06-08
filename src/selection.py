@@ -2,6 +2,7 @@ import random
 from fitness import *
 
 def aleatoria_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
+    # Seleção aleatória por aptidão: escolhe indivíduos aleatoriamente e retorna a lista dos escolhidos para a próxima etapa.
     selecionados = []
     qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     
@@ -21,6 +22,7 @@ def aleatoria_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=F
     return selecionados
 
 def intervalo_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
+    # Divide a população em intervalos, seleciona o melhor de cada um e retorna.
     selecionados = []
     
     qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
@@ -48,6 +50,7 @@ def intervalo_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=F
     return selecionados[:qtd_geracao]
 
 def aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
+    # Seleção por aptidão direta: ordena por fitness e retorna os top-n
     qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
 
     populacao_ordenada = sorted(populacao, key=lambda x: fitness(funcao, x), reverse=True)
@@ -60,6 +63,7 @@ def aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     return selecionados
 
 def roleta(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
+    # Seleção por roleta: probabilidade proporcional ao fitness.
     selecionados = []
     qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
 
@@ -90,6 +94,7 @@ def roleta(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     return selecionados
 
 def ranking(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
+    # Seleção por ranking: ordena a população pelo fitness para que os melhores indivíduos sejam escolhidos com maior chance.
     selecionados = []
     qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
 
@@ -97,7 +102,7 @@ def ranking(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
         print(f"qtd_geracao: {qtd_geracao}")
 
     populacao_ordenada = sorted(populacao, key=lambda x: fitness(funcao, x), reverse=True)
-    pesos =list(range(len(populacao_ordenada), 0, -1))
+    pesos = list(range(len(populacao_ordenada), 0, -1))
 
     for _ in range(qtd_geracao):
         pick = random.choices(populacao_ordenada, weights=pesos, k=1)[0]

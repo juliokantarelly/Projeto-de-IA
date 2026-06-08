@@ -2,8 +2,8 @@ import random
 from fitness import *
 
 def best_aleatoria_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
+    # Seleção aleatória por aptidão: escolhe indivíduos aleatoriamente e retorna o melhor entre os escolhidos.
     selecionados = []
-    # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     # Resolve o problema de 9.999 virar 9
     qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
     
@@ -23,12 +23,14 @@ def best_aleatoria_aptidao(populacao, funcao, reducao_por_geracao, fitness, verb
             (individuo, fitness(funcao, individuo))
         )
     
+    # Se nenhum indivíduo foi selecionado, retorna o melhor da população toda
     if not selecionados:
         return max(populacao, key=lambda ind: fitness(funcao, ind))
     else:
         return max(selecionados, key=lambda x: x[1])[0]
 
 def best_intervalo_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
+   # Divide a população em intervalos e seleciona o melhor de cada um e retorna o melhor entre os intervalos no final.
     if not populacao:
         return None
 
@@ -54,13 +56,14 @@ def best_intervalo_aptidao(populacao, funcao, reducao_por_geracao, fitness, verb
         
         melhores_dos_intervalos.append(individuo_apto)
         
+    # Se nenhum intervalo produziu candidatos, retorna o melhor da população inteira
     if not melhores_dos_intervalos:
         return max(populacao, key=lambda ind: fitness(funcao, ind))
     
     return max(melhores_dos_intervalos, key=lambda ind: fitness(funcao, ind))
 
 def best_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
-    # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
+    # Seleção por aptidão direta: ordena a população e pega os top-n
     qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
 
     populacao_ordenada = sorted(populacao, key=lambda x: fitness(funcao, x), reverse=True)
@@ -70,11 +73,13 @@ def best_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False)
 
     selecionados = populacao_ordenada[:qtd_geracao]
 
+    # Retorna o melhor entre os selecionados
     return max(selecionados, key=lambda x: fitness(funcao, x))
 
 def best_roleta(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
+    # Seleção por roleta: probabilidade proporcional ao fitness.
     selecionados = []
-    # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
+    
     qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
 
     if verbose:
@@ -100,21 +105,23 @@ def best_roleta(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
 
                 selecionados.append((individuo, fitness(funcao, individuo)))
                 break
+    # Se nada foi selecionado, retorna o melhor da população toda
     if not selecionados:
         return max(populacao, key=lambda ind: fitness(funcao, ind))
     else:
         return max(selecionados, key=lambda x: x[1])[0]
 
 def best_ranking(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
+    # Seleção por ranking: ordena a população pelo fitness para que os melhores indivíduos sejam escolhidos com maior chance.
     selecionados = []
-    # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
+    
     qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
 
     if verbose:
         print(f"qtd_geracao: {qtd_geracao}")
 
     populacao_ordenada = sorted(populacao, key=lambda x: fitness(funcao, x), reverse=True)
-    pesos =list(range(len(populacao_ordenada), 0, -1))
+    pesos = list(range(len(populacao_ordenada), 0, -1))
 
     for _ in range(qtd_geracao):
         pick = random.choices(populacao_ordenada, weights=pesos, k=1)[0]
