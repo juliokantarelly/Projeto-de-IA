@@ -2,10 +2,8 @@ from src.select_best import best_aleatoria, best_intervalo_aptidao, best_aptidao
 from src.crossover import single_point, dual_point, uniform
 from src.fitness import fitness_max, fitness_min1, fitness_min2
 from src.selection import aleatoria, intervalo_aptidao, aptidao, roleta, ranking
-from src.mutation import mutation, mutation_incremental
+from src.mutation import mutation, mutation_step
 
-LIMITE_INFERIOR = -512
-LIMITE_SUPERIOR = 511
 NUM_BITS = 10
 
 TAMANHO_POPULACAO = 100
@@ -50,5 +48,5 @@ opcoes_crossover = {
 
 opcoes_mutation = {
     "MUTATION_01" : mutation,
-    "MUTATION_02" : mutation_incremental
+    "MUTATION_02" : mutation_step
 }
