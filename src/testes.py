@@ -4,6 +4,10 @@ from src.genetic_algorithm import GeneticAlgorithm
 import itertools
 import pandas as pd
 
+
+algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, TAMANHO_POPULACAO, NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER, TAXA_MUTACAO)
+
+
 def test():
 
     # chave_fitness = list(opcoes_fitness.keys())[0:1] # Testar usando apenas FITNESS_MAX
@@ -30,7 +34,7 @@ def test():
         print(f"--- Teste {contador} ---")
         print(f"Parâmetros: {fit} | {sel} | {sel_best} | {cross} | {mut}")
 
-        algoritmo_genetico = GeneticAlgorithm(FUNCAO_04, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, NUM_GERACOES, 
+        algoritmo_genetico = GeneticAlgorithm(FUNCAO_04, NUM_BITS, TAMANHO_POPULACAO, NUM_GERACOES, 
                                         REDUCAO_POR_GERACAO, TAXA_CROSSOVER, TAXA_MUTACAO)
 
         resultado = algoritmo_genetico.genetic_algorithm(

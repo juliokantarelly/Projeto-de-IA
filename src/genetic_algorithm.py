@@ -10,12 +10,10 @@ import pandas as pd
 
 class GeneticAlgorithm():
 
-    def __init__(self, funcao, num_bits, limite_inferior, limite_superior, tam_populacao, num_geracoes,
+    def __init__(self, funcao, num_bits, tam_populacao, num_geracoes,
                  reducao_por_geracao, taxa_crossover, taxa_mutacao):
         self.funcao = funcao
         self.num_bits = num_bits
-        self.limite_inferior = limite_inferior
-        self.limite_superior = limite_superior
         self.tam_populacao = tam_populacao
         self.num_geracoes = num_geracoes
         self.reducao_por_geracao = reducao_por_geracao
@@ -24,7 +22,7 @@ class GeneticAlgorithm():
 
     def genetic_algorithm(self, func_fitness, func_selecao, func_best_fit, func_crossover, func_mutation):
         
-        populacao = criar_populacao(self.tam_populacao, self.limite_inferior, self.limite_superior)
+        populacao = criar_populacao(self.tam_populacao, self.num_bits)
 
         fig, _ = plt.subplots(1, 1, figsize=(12, 18))
         mais_aptos = []

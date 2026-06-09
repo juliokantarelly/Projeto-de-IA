@@ -4,8 +4,6 @@ from src.fitness import fitness_max, fitness_min1, fitness_min2
 from src.selection import aleatoria, intervalo_aptidao, aptidao, roleta, ranking
 from src.mutation import mutation, mutation_step
 
-LIMITE_INFERIOR = -512
-LIMITE_SUPERIOR = 511
 NUM_BITS = 10
 
 TAMANHO_POPULACAO = 100
