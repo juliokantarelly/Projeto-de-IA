@@ -26,7 +26,6 @@ class GeneticAlgorithm():
 
         fig, _ = plt.subplots(1, 1, figsize=(12, 18))
         mais_aptos = []
-        populacao_total = []
 
         tabela = PrettyTable()
         tabela.field_names = ["Geração", "x", "Fitness"]
@@ -34,14 +33,10 @@ class GeneticAlgorithm():
 
         for geracao in range(self.num_geracoes):
 
-
-            # fitnesses = [func_fitness(funcao=self.funcao, individuo=ind) for ind in populacao]
-
             melhor_ind = func_best_fit(populacao, self.funcao, self.reducao_por_geracao, func_fitness)
             melhor_fit =  func_fitness(funcao=self.funcao, individuo=melhor_ind)
 
             mais_aptos.append((melhor_ind, melhor_fit))
-            populacao_total.append(populacao[:])
             tabela.add_row([geracao+1, melhor_ind, melhor_fit])
 
             populacao = func_selecao(populacao, self.funcao, self.reducao_por_geracao, func_fitness)
@@ -87,9 +82,6 @@ class GeneticAlgorithm():
 
         fig.update_traces(line=dict(color='royalblue', width=2),
                         marker=dict(size=8, color='royalblue', line=dict(width=1, color='DarkSlateGrey')))
-
-        # fig.show()
-
 
         melhor_individuo = func_best_fit(populacao, self.funcao, self.reducao_por_geracao, func_fitness)
         melhor_fitness = fitness_max(self.funcao, melhor_individuo)
