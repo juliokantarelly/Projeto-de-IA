@@ -25,7 +25,7 @@ def mutation(individuo, taxa_mutacao, num_bits, test=False):
         
     return individuo
 
-def mutation_incremental(individuo, taxa_mutacao, num_bits, test=False):
+def mutation_step(individuo, taxa_mutacao, num_bits, test=False):
     if random.random() < taxa_mutacao or test:
         passo = random.choice([-1, 1])
         individuo_mutado = individuo + passo
