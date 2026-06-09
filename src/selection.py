@@ -1,7 +1,7 @@
 import random
-from fitness import *
+from src.fitness import *
 
-def aleatoria_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
+def aleatoria(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []
     qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     
@@ -22,28 +22,30 @@ def aleatoria_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=F
 
 def intervalo_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []
-    qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     
-    qtd_analise = len(populacao) // qtd_geracao
+    qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
+    qtd_geracao = max(1, qtd_geracao)
+    
+    qtd_analise = max(1, len(populacao) // qtd_geracao)
+    
     if verbose:
         print(f"qtd_geracao: {qtd_geracao} | qtd_analise: {qtd_analise}")
     
     for intervalo in range(0, len(populacao), qtd_analise):
+        sub_populacao = populacao[intervalo:intervalo + qtd_analise]
+        if not sub_populacao:
+            continue
         
-        indice_apto_intervalo = max(
-            populacao[intervalo:intervalo + qtd_analise], 
-            key=lambda x: fitness(funcao, x)
-        )
-        individuo_apto = populacao[indice_apto_intervalo]
+        individuo_apto = max(sub_populacao, key=lambda x: fitness(funcao, x))
         
         if verbose:
-            print(f"Dentre as opcões: {populacao[intervalo:intervalo + qtd_analise]}")
-            print(f"Selecinado: {individuo_apto} | Porque fitness: {fitness(funcao, individuo_apto)}")
+            print(f"Dentre as opções: {sub_populacao}")
+            print(f"Selecionado: {individuo_apto} | Porque fitness: {fitness(funcao, individuo_apto)}")
             print()
         
         selecionados.append(individuo_apto)
     
-    return selecionados
+    return selecionados[:qtd_geracao]
 
 def aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))

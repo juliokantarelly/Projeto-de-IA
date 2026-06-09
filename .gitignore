@@ -1,1 +1,4 @@
 __pycache__/
+historico_testes_func_*.csv
+.venv/*
+*=*
