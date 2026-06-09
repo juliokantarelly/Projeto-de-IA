@@ -9,8 +9,7 @@ from genetic_algorithm import GeneticAlgorithm
 import itertools
 
 
-algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, LIMITE_INFERIOR, LIMITE_SUPERIOR, TAMANHO_POPULACAO, NUM_GERACOES, 
-                                        REDUCAO_POR_GERACAO, TAXA_CROSSOVER, TAXA_MUTACAO)
+algoritmo_genetico = GeneticAlgorithm(FUNCAO_01, NUM_BITS, TAMANHO_POPULACAO, NUM_GERACOES, REDUCAO_POR_GERACAO, TAXA_CROSSOVER, TAXA_MUTACAO)
 
 
 def test():

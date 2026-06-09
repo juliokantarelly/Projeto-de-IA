@@ -4,8 +4,6 @@ from fitness import fitness_max, fitness_min1, fitness_min2
 from selection import aleatoria_aptidao, intervalo_aptidao, aptidao, roleta, ranking
 from mutacao import mutar, muta_math
 
-LIMITE_INFERIOR = -512
-LIMITE_SUPERIOR = 511
 NUM_BITS = 10
 
 TAMANHO_POPULACAO = 100
