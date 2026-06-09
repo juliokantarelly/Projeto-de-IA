@@ -3,7 +3,7 @@ import random
 LIMITE_INFERIOR = -512
 LIMITE_SUPERIOR = 511
 
-#Não utilizar essa mutação, a natureza de mudança dela é pouco significativa.
+# Não utilizar essa mutação, a natureza de mudança dela é pouco significativa.
 def mutation(individuo, taxa_mutacao, num_bits, test=False):
     if random.random() < taxa_mutacao or test:
         ind_bin = format(individuo & ((1 << num_bits) - 1), f"0{num_bits}b")
