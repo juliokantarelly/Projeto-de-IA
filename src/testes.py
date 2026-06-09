@@ -1,6 +1,6 @@
-from definitions import *
+from src.definitions import *
 # from selection import *
-from genetic_algorithm import GeneticAlgorithm
+from src.genetic_algorithm import GeneticAlgorithm
 import itertools
 import pandas as pd
 

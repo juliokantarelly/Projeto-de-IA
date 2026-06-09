@@ -1,5 +1,5 @@
-from utils import *
-from fitness import *
+from src.utils import *
+from src.fitness import *
 import matplotlib.pyplot as plt
 from prettytable import PrettyTable
 import plotly.express as px

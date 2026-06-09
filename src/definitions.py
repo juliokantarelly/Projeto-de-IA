@@ -1,8 +1,8 @@
-from select_best import best_aleatoria, best_intervalo_aptidao, best_aptidao, best_roleta, best_ranking
-from crossover import single_point, dual_point, uniform
-from fitness import fitness_max, fitness_min1, fitness_min2
-from selection import aleatoria, intervalo_aptidao, aptidao, roleta, ranking
-from mutation import mutation, mutation_incremental
+from src.select_best import best_aleatoria, best_intervalo_aptidao, best_aptidao, best_roleta, best_ranking
+from src.crossover import single_point, dual_point, uniform
+from src.fitness import fitness_max, fitness_min1, fitness_min2
+from src.selection import aleatoria, intervalo_aptidao, aptidao, roleta, ranking
+from src.mutation import mutation, mutation_incremental
 
 LIMITE_INFERIOR = -512
 LIMITE_SUPERIOR = 511

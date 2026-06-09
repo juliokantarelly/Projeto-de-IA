@@ -1,5 +1,5 @@
 import random
-from fitness import *
+from src.fitness import *
 
 def aleatoria(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []

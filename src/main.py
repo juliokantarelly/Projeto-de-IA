@@ -1,5 +1,5 @@
-from definitions import *
-from genetic_algorithm import GeneticAlgorithm
+from src.definitions import *
+from src.genetic_algorithm import GeneticAlgorithm
 
 
 """
