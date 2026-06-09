@@ -1,10 +1,8 @@
 import random
 from fitness import *
 
-def best_aleatoria_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
+def best_aleatoria(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []
-    # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
-    # Resolve o problema de 9.999 virar 9
     qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
     
     if verbose:
@@ -60,7 +58,6 @@ def best_intervalo_aptidao(populacao, funcao, reducao_por_geracao, fitness, verb
     return max(melhores_dos_intervalos, key=lambda ind: fitness(funcao, ind))
 
 def best_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
-    # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
 
     populacao_ordenada = sorted(populacao, key=lambda x: fitness(funcao, x), reverse=True)
@@ -74,7 +71,6 @@ def best_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False)
 
 def best_roleta(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []
-    # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
 
     if verbose:
@@ -107,7 +103,6 @@ def best_roleta(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
 
 def best_ranking(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []
-    # qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     qtd_geracao = int(round((1 - reducao_por_geracao) * len(populacao)))
 
     if verbose:

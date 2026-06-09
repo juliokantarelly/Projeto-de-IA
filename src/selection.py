@@ -1,7 +1,7 @@
 import random
 from fitness import *
 
-def aleatoria_aptidao(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
+def aleatoria(populacao, funcao, reducao_por_geracao, fitness, verbose=False):
     selecionados = []
     qtd_geracao = int((1 - reducao_por_geracao) * len(populacao))
     

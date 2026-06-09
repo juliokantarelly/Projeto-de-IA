@@ -1,8 +1,8 @@
-from select_best import best_aleatoria_aptidao, best_intervalo_aptidao, best_aptidao, best_roleta, best_ranking
+from select_best import best_aleatoria, best_intervalo_aptidao, best_aptidao, best_roleta, best_ranking
 from crossover import single_point, dual_point, uniform
 from fitness import fitness_max, fitness_min1, fitness_min2
-from selection import aleatoria_aptidao, intervalo_aptidao, aptidao, roleta, ranking
-from mutation import mutation, mutation_math
+from selection import aleatoria, intervalo_aptidao, aptidao, roleta, ranking
+from mutation import mutation, mutation_incremental
 
 LIMITE_INFERIOR = -512
 LIMITE_SUPERIOR = 511
@@ -27,7 +27,7 @@ opcoes_fitness = {
 }
 
 opcoes_selecao = {
-    "FUNCAO_SELECAO_01" : aleatoria_aptidao,
+    "FUNCAO_SELECAO_01" : aleatoria,
     "FUNCAO_SELECAO_02" : intervalo_aptidao,
     "FUNCAO_SELECAO_03" : aptidao,
     "FUNCAO_SELECAO_04" : roleta,
@@ -35,7 +35,7 @@ opcoes_selecao = {
 }
 
 opcoes_selecao_best = {
-    "FUNCAO_SELECAO_BEST_01" : best_aleatoria_aptidao,
+    "FUNCAO_SELECAO_BEST_01" : best_aleatoria,
     "FUNCAO_SELECAO_BEST_02" : best_intervalo_aptidao,
     "FUNCAO_SELECAO_BEST_03" : best_aptidao,
     "FUNCAO_SELECAO_BEST_04" : best_roleta,
@@ -50,5 +50,5 @@ opcoes_crossover = {
 
 opcoes_mutation = {
     "MUTATION_01" : mutation,
-    "MUTATION_02" : mutation_math
+    "MUTATION_02" : mutation_incremental
 }
